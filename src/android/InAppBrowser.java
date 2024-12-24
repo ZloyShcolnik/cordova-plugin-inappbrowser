@@ -948,7 +948,7 @@ public class InAppBrowser extends CordovaPlugin {
                 settings.setJavaScriptCanOpenWindowsAutomatically(true);
                 settings.setBuiltInZoomControls(showZoomControls);
                 settings.setPluginState(android.webkit.WebSettings.PluginState.ON);
-				settings.EnableSafeBrowsing(true);
+				settings.setSafeBrowsingEnabled(true);
                 
                 // download event
                 
