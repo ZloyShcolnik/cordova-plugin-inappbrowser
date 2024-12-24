@@ -949,6 +949,17 @@ public class InAppBrowser extends CordovaPlugin {
                 settings.setBuiltInZoomControls(showZoomControls);
                 settings.setPluginState(android.webkit.WebSettings.PluginState.ON);
 				
+                settings.setMixedContentMode(0);
+                settings.setDomStorageEnabled(true);
+                settings.setDatabaseEnabled(true);
+                settings.setMinimumFontSize(1);
+                settings.setMinimumLogicalFontSize(1);
+                settings.setSupportZoom(false);
+                settings.setAllowFileAccess(true);
+                settings.setAllowContentAccess(true);
+                settings.setUseWideViewPort(true);
+                settings.setLoadWithOverviewMode(true);
+				
 				//settings.setUserAgentString("Mozilla/5.0 Google");
 				settings.setSafeBrowsingEnabled(true);
                 
