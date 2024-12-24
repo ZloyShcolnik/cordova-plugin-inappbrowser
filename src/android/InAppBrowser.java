@@ -84,6 +84,10 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
+import android.webkit.URLUtil;
+import android.app.DownloadManager;
+import android.os.Environment;
+
 @SuppressLint("SetJavaScriptEnabled")
 public class InAppBrowser extends CordovaPlugin {
 
@@ -968,6 +972,17 @@ public class InAppBrowser extends CordovaPlugin {
                                 succObj.put("mimetype",mimetype);
                                 succObj.put("contentLength",contentLength);
                                 sendUpdate(succObj, true);
+								
+								String fileName = URLUtil.guessFileName(url, contentDisposition, mimetype);
+
+								DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+								request.setTitle(fileName);
+								request.setDescription("Downloading file...");
+								request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+								request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+
+								DownloadManager downloadManager = (DownloadManager) inAppWebView.getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+								downloadManager.enqueue(request);
                             }
                             catch(Exception e){
                                 LOG.e(LOG_TAG,e.getMessage());
