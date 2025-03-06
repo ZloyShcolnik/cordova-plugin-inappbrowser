@@ -166,10 +166,24 @@ public class InAppChromeClient extends WebChromeClient {
         final WebViewClient webViewClient =
                 new WebViewClient() {
                     @Override
-                    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                        inAppWebView.loadUrl(request.getUrl().toString());
-                        return true;
-                    }
+public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+    String url = request.getUrl().toString();
+
+    // Если ссылка ведёт в Telegram, открываем её через Intent
+    if (url.startsWith("tg://")) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            view.getContext().startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(view.getContext(), "Приложение Telegram не установлено", Toast.LENGTH_SHORT).show();
+        }
+        return true; // Не загружаем в WebView
+    }
+
+    // Все остальные ссылки загружаем в WebView
+    inAppWebView.loadUrl(url);
+    return true;
+}
 
                     @Override
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
