@@ -19,6 +19,10 @@
 package org.apache.cordova.inappbrowser;
 
 import android.widget.Toast;
+import android.content.Intent;
+import android.net.Uri;
+import android.content.ActivityNotFoundException;
+
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.LOG;
 import org.apache.cordova.PluginResult;
