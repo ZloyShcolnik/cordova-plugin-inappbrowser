@@ -18,6 +18,7 @@
 */
 package org.apache.cordova.inappbrowser;
 
+import android.widget.Toast;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.LOG;
 import org.apache.cordova.PluginResult;
